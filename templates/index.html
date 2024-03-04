@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <style>
+        body {
+            background-image: url('your_image_path.jpg'); /* Replace 'your_image_path.jpg' with the actual path to your image */
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            background-color: rgba(0, 0, 255, 0.3); /* Adjust the rgba values for the desired blue tint */
+        }
+
+        h1, ul, form {
+            background-color: rgba(255, 255, 255, 0.8); /* Set a semi-transparent white background for better readability */
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>ToDo List</h1>
+    <ul>
+        {% for task in tasks %}
+            <li>{{ task }} <a href="{{ url_for('delete_task', task_id=loop.index-1) }}">[Delete]</a></li>
+        {% endfor %}
+    </ul>
+    <form action="{{ url_for('add_task') }}" method="post">
+        <label for="task">New Task:</label>
+        <input type="text" id="task" name="task" required>
+        <button type="submit">Add Task</button>
+    </form>
+</body>
+</html>
